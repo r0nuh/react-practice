@@ -26,6 +26,7 @@ class App extends Component {
       <div className="App">
         <h1>Hi! I'm a {this.props.appName}</h1>
         <button onClick={this.handleNameChange.bind(this, 'Hunor')}>Swtich Name</button>
+        {/* <button onClick={() => this.handleNameChange('Hunor!')}>Swtich Name</button>         */}
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age} />
