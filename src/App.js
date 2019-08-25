@@ -12,10 +12,10 @@ class App extends Component {
     ]
   }
 
-  handleNameChange = () => {
+  handleNameChange = (newName) => {
     this.setState({
       persons: [
-        { name: 'Hunor', age: 35 },
+        { name: newName, age: 35 },
         { name: 'Peter', age: 23 }
       ]
     })
@@ -25,14 +25,14 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hi! I'm a {this.props.appName}</h1>
-        <button onClick={this.handleNameChange}>Swtich Name</button>
+        <button onClick={this.handleNameChange.bind(this, 'Hunor')}>Swtich Name</button>
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age} />
         <Person
           name={this.state.persons[1].name}
           age={this.state.persons[1].age}
-          click={this.handleNameChange}>
+          click={this.handleNameChange.bind(this, 'Sysqo')}>
           My hobby is: making music
             </Person>
         <Person name="Dorka" age="3" />
