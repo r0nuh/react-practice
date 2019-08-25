@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Person from './Person/Person';
 import { app } from './App';
+
 const app = props => {
   const [personsState, setPersonsState] = useState({
     persons: [
@@ -17,7 +18,7 @@ const app = props => {
       ]
     });
   };
-  // render() {
+ 
   return (<div className="App">
 
     <h1>Hi! I'm a React App</h1>
@@ -29,5 +30,5 @@ const app = props => {
     <Person name="Dorka" age="3" />
   </div>);
 };
-// }
+
 export default app;
