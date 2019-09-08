@@ -8,7 +8,7 @@ class App extends Component {
 
   state = {
     outputs: [
-      {username: "Andy", like: "pizza"},
+      { username: "Andy", like: "pizza" },
       { username: 'Sarah', like: 'cats' }
     ]
   }
@@ -16,16 +16,21 @@ class App extends Component {
   handleNameChange = (event) => {
     this.setState({
       outputs: [
-        {username: event.target.value, like: "pizza"},
-        {username: 'Sarah', like: 'cats' }
+        { username: event.target.value, like: "pizza" },
+        { username: 'Sarah', like: 'cats' }
       ]
     });
   }
 
   render() {
+    const layout = {
+      backgroundColor: 'rosybrown',
+      margin: '2px 2px 100px'
+    }
+
     return (
       <div className="App">
-        <ol>
+        <ol style={layout}>
           <li>Create TWO new components: UserInput and UserOutput</li>
           <li>UserInput should hold an input element, UserOutput two paragraphs</li>
           <li>Output multiple UserOutput components in the App component (any paragraph texts of your choice)</li>
@@ -37,11 +42,12 @@ class App extends Component {
           <li>Add two-way-binding to your input (in UserInput) to also display the starting username</li>
           <li>Add styling of your choice to your components/ elements in the components - both with inline styles and stylesheets</li>
         </ol>
-
-        <UserInput changed={this.handleNameChange}/>
-        <UserOutput uname={this.state.outputs[0].username} like={this.state.outputs[0].like}/>
-        <UserOutput uname={this.state.outputs[1].username} like={this.state.outputs[1].like}/>
-        <UserOutput uname="max" like="everything"/>
+        <div>
+          <UserInput changed={this.handleNameChange} current={this.state.outputs[0].username}/>
+          <UserOutput uname={this.state.outputs[0].username} like={this.state.outputs[0].like} />
+          <UserOutput uname={this.state.outputs[1].username} like={this.state.outputs[1].like} />
+          <UserOutput uname="Max" like="everything" />
+        </div>
       </div>
 
     );
