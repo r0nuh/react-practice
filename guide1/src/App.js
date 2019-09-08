@@ -6,20 +6,27 @@ class App extends Component {
 
   state = {
     persons: [
-      { name: 'Szilard', age: 35 },
-      { name: 'Peter', age: 33 },
-      { name: 'Dorka', age: 3 }
+      { id: '1', name: 'Szilard', age: 35 },
+      { id: '2', name: 'Peter', age: 33 },
+      { id: '3', name: 'Dorka', age: 3 }
     ],
     showPersons: false
   }
 
-  handleNameChange = (event) => {
-    this.setState({
-      persons: [
-        { name: 'Szilard', age: 35 },
-        { name: event.target.value, age: 23 }
-      ]
-    })
+  handleNameChange = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+    
+    const person = {...this.state.persons[personIndex]};
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+
+    persons[personIndex] = person;
+
+    this.setState({ persons: persons });
   }
 
   handlePersonDelete = (personIndex) => {
@@ -50,11 +57,13 @@ class App extends Component {
           {this.state.persons.map((person, index) => {
             return <Person
             click={() => this.handlePersonDelete(index)}
+            key={person.id}
             name={person.name} 
-            age={person.age}/>
+            age={person.age}
+            changed={(event) => this.handleNameChange(event, person.id)}/>
           })}
         </div>
-      )
+      );
     }
     return (
       <div className="App">
@@ -69,42 +78,3 @@ class App extends Component {
 }
 
 export default App;
-
-// HOW TO MANGE STATE IN A FUNCTIONAL COMPONENT
-
-// import React, { useState } from 'react';
-// import './App.css';
-// import Person from './Person/Person';
-
-// const app = props => {
-
-//   const [personsState, setPersonsState] = useState({
-//     persons: [
-//       { name: 'Szilard', age: 35 },
-//       { name: 'Peter', age: 33 },
-//       { name: 'Dorka', age: 3 }
-//     ]
-//   });
-
-//   const handleNameChange = () => {
-//     setPersonsState({
-//       persons: [
-//         { name: 'Hunor', age: 35 },
-//         { name: 'Peter', age: 33 },
-//         { name: 'Dorka', age: 3 }
-//       ]
-//     })
-//   }
-
-//   return (
-//     <div className="App">
-//       <h1>Hi! I'm a React App</h1>
-//       <button onClick={handleNameChange}>Swtich Name</button>
-//       <Person name={personsState.persons[0].name} age={personsState.persons[0].age} />
-//       <Person name={personsState.persons[1].name} age={personsState.persons[1].age}>My hobby is: making music</Person>
-//       <Person name={personsState.persons[2].name} age={personsState.persons[2].age} />
-//     </div>
-//   );
-// }
-
-// export default app;
