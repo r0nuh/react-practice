@@ -9,7 +9,8 @@ class App extends Component {
       { name: 'Szilard', age: 35 },
       { name: 'Peter', age: 33 },
       { name: 'Dorka', age: 3 }
-    ]
+    ],
+    showPersons: false
   }
 
   handleNameChange = (event) => {
@@ -19,6 +20,11 @@ class App extends Component {
         { name: event.target.value, age: 23 }
       ]
     })
+  }
+
+  toggleNameHandler = () => {
+    const show = this.state.showPersons;
+    this.setState({showPersons: !show});
   }
 
   render() {
@@ -33,21 +39,26 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hi! I'm a {this.props.appName}</h1>
-        <button 
+        <button
           style={style}
-          onClick={this.handleNameChange.bind(this, 'Hunor')}>Swtich Name</button>
+          onClick={this.toggleNameHandler}>Swtich Name</button>
         {/* <button onClick={() => this.handleNameChange('Hunor!')}>Swtich Name</button>         */}
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age} />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.handleNameChange.bind(this, 'Sysqo')}
-          changed={this.handleNameChange}>
-          My hobby is: making music
+        {
+          this.state.showPersons === true ? 
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age} />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.handleNameChange.bind(this, 'Sysqo')}
+              changed={this.handleNameChange}>
+              My hobby is: making music
             </Person>
-        <Person name="Dorka" age="3" />
+            <Person name="Dorka" age="3" />
+          </div> : null
+        }
       </div>
     );
   }
