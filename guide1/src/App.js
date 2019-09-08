@@ -24,7 +24,7 @@ class App extends Component {
 
   toggleNameHandler = () => {
     const show = this.state.showPersons;
-    this.setState({showPersons: !show});
+    this.setState({ showPersons: !show });
   }
 
   render() {
@@ -35,30 +35,32 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     }
+    let persons = null;
 
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age} />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.handleNameChange.bind(this, 'Sysqo')}
+            changed={this.handleNameChange}>
+            My hobby is: making music
+          </Person>
+          <Person name="Dorka" age="3" />
+        </div>
+      )
+    }
     return (
       <div className="App">
         <h1>Hi! I'm a {this.props.appName}</h1>
         <button
           style={style}
-          onClick={this.toggleNameHandler}>Swtich Name</button>
-        {/* <button onClick={() => this.handleNameChange('Hunor!')}>Swtich Name</button>         */}
-        {
-          this.state.showPersons === true ? 
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age} />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              click={this.handleNameChange.bind(this, 'Sysqo')}
-              changed={this.handleNameChange}>
-              My hobby is: making music
-            </Person>
-            <Person name="Dorka" age="3" />
-          </div> : null
-        }
+          onClick={this.toggleNameHandler}>Toggle Name</button>
+        {persons}
       </div>
     );
   }
